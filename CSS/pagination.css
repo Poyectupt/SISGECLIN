@@ -1,0 +1,783 @@
+/* ============================================================
+   SISGECLIN - Sistema de Paginación Elegante
+   ============================================================ */
+
+/* Contenedor principal de paginación */
+.pagination-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    background: var(--light);
+    border-top: 1px solid var(--grey);
+    border-radius: 0 0 12px 12px;
+    margin-top: 0;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+/* Información de registros */
+.pagination-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--dark);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.pagination-info i {
+    font-size: 18px;
+    color: var(--primary);
+}
+
+.pagination-info .text-muted {
+    color: var(--dark-grey);
+    font-weight: 400;
+}
+
+/* Selector de densidad */
+.pagination-density {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination-density label {
+    font-size: 14px;
+    color: var(--dark);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.pagination-density select {
+    padding: 8px 32px 8px 12px;
+    border: 2px solid var(--grey);
+    border-radius: 8px;
+    background: white;
+    color: var(--dark);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%233C91E6' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    min-width: 80px;
+}
+
+.pagination-density select:hover {
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(60, 145, 230, 0.15);
+}
+
+.pagination-density select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(60, 145, 230, 0.1);
+}
+
+/* Controles de navegación */
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Botones de paginación */
+.pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border: 2px solid var(--grey);
+    border-radius: 8px;
+    background: white;
+    color: var(--dark);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    user-select: none;
+}
+
+.pagination-btn:hover:not(:disabled):not(.active) {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(60, 145, 230, 0.25);
+}
+
+.pagination-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: var(--light);
+    color: var(--dark-grey);
+}
+
+.pagination-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(60, 145, 230, 0.3);
+    cursor: default;
+}
+
+/* Botones de navegación (anterior/siguiente) */
+.pagination-btn.nav-btn {
+    gap: 6px;
+    font-weight: 500;
+}
+
+.pagination-btn.nav-btn i {
+    font-size: 16px;
+}
+
+/* Separador de páginas */
+.pagination-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    color: var(--dark-grey);
+    font-weight: 600;
+    user-select: none;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .pagination-wrapper {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+    }
+    
+    .pagination-info {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .pagination-density {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .pagination-controls {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .pagination-btn {
+        min-width: 36px;
+        height: 36px;
+        font-size: 13px;
+    }
+    
+    /* Ocultar números de página en móvil, solo mostrar anterior/siguiente */
+    .pagination-btn:not(.nav-btn):not(.active) {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .pagination-btn.nav-btn span {
+        display: none;
+    }
+    
+    .pagination-btn.nav-btn {
+        min-width: 36px;
+        padding: 0;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pagination-wrapper {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Modo oscuro */
+body.dark-mode .pagination-wrapper {
+    background: var(--dark);
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .pagination-info,
+body.dark-mode .pagination-density label {
+    color: var(--light);
+}
+
+body.dark-mode .pagination-density select {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--light);
+}
+
+body.dark-mode .pagination-density select:hover {
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .pagination-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--light);
+}
+
+body.dark-mode .pagination-btn:hover:not(:disabled):not(.active) {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+body.dark-mode .pagination-btn:disabled {
+    background: rgba(255, 255, 255, 0.02);
+    color: rgba(255, 255, 255, 0.3);
+}
+
+body.dark-mode .pagination-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+/* Estilos adicionales para mejorar la integración */
+.table-container {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table-responsive {
+    border-radius: 0;
+}
+
+/* Asegurar que la tabla no tenga border-radius en la parte inferior */
+.table-responsive table {
+    margin-bottom: 0;
+}
+
+
+/* ============================================================
+   Grupos de Botones de Exportación
+   ============================================================ */
+
+/* Contenedor de acciones del header — se apila en dos filas si no cabe */
+.head-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+/* Grupo de botones de exportación — cápsula unificada */
+.btn-group {
+    display: inline-flex;
+    align-items: center;
+    background: var(--bg-body, #f4f6f9);
+    border: 1px solid var(--border-color, #dee2e6);
+    border-radius: 8px;
+    overflow: hidden;
+    gap: 0;
+}
+
+/* Botón de exportación dentro del grupo */
+.btn-export {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    background: transparent;
+    color: var(--text-secondary, #6c757d);
+    border: none;
+    border-right: 1px solid var(--border-color, #dee2e6);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.btn-export:last-child {
+    border-right: none;
+}
+
+.btn-export i {
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.btn-export:hover {
+    background: var(--primary, #0d6efd);
+    color: #fff;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Modo oscuro */
+body.dark-mode .btn-group {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .btn-export {
+    color: rgba(255,255,255,0.6);
+    border-right-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .btn-export:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+/* Responsive — en pantallas pequeñas los botones se apilan */
+@media screen and (max-width: 768px) {
+    .head-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .btn-group {
+        width: 100%;
+        flex-wrap: wrap;
+        border-radius: 8px;
+    }
+
+    .btn-export {
+        flex: 1 1 auto;
+        justify-content: center;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color, #dee2e6);
+        padding: 10px 8px;
+    }
+
+    .btn-export:last-child {
+        border-bottom: none;
+    }
+}
+
+
+/* ============================================================
+   Envío Masivo de Mensajes — Compacto
+   ============================================================ */
+
+/* Botón trigger en el header */
+.btn-masivo-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 16px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 10px rgba(245, 87, 108, 0.3);
+    white-space: nowrap;
+}
+
+.btn-masivo-trigger i {
+    font-size: 16px;
+}
+
+.btn-masivo-trigger:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 16px rgba(245, 87, 108, 0.45);
+}
+
+/* Modal container — ancho fijo, altura controlada */
+.masivo-modal {
+    width: 100%;
+    max-width: 520px;
+    max-height: 92vh;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    padding: 0 !important;
+}
+
+/* Header compacto */
+.masivo-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px 16px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.masivo-header-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.22);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.masivo-header-icon i {
+    font-size: 22px;
+    color: white;
+}
+
+.masivo-header-text h2 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+}
+
+.masivo-header-text p {
+    margin: 3px 0 0;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+}
+
+.masivo-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 17px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    line-height: 1;
+}
+
+.masivo-close:hover {
+    background: rgba(255,255,255,0.38);
+}
+
+/* Body con scroll si es necesario */
+.masivo-body {
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* Secciones */
+.masivo-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.masivo-section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.masivo-step {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Pills — fila horizontal, sin descripción pequeña */
+.masivo-group-pills {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.masivo-pill {
+    cursor: pointer;
+    user-select: none;
+}
+
+.masivo-pill input[type="radio"] {
+    display: none;
+}
+
+.masivo-pill span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 8px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    background: #f8f9fa;
+    transition: all 0.18s ease;
+    text-align: center;
+    min-height: 72px;
+}
+
+.masivo-pill span i {
+    font-size: 24px;
+    color: #bbb;
+    transition: color 0.18s;
+    display: block;
+    line-height: 1;
+}
+
+.masivo-pill span strong {
+    font-size: 12px;
+    color: #555;
+    display: block;
+    transition: color 0.18s;
+    line-height: 1;
+}
+
+.masivo-pill:hover span {
+    border-color: #f5576c;
+    background: #fff5f6;
+}
+
+.masivo-pill:hover span i,
+.masivo-pill:hover span strong {
+    color: #f5576c;
+}
+
+.masivo-pill input[type="radio"]:checked + span {
+    border-color: #f5576c;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    box-shadow: 0 4px 12px rgba(245, 87, 108, 0.28);
+}
+
+.masivo-pill input[type="radio"]:checked + span i,
+.masivo-pill input[type="radio"]:checked + span strong {
+    color: white;
+}
+
+/* Inputs */
+.masivo-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #333;
+    background: #f8f9fa;
+    transition: all 0.18s;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.masivo-input:focus {
+    outline: none;
+    border-color: #f5576c;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(245, 87, 108, 0.08);
+}
+
+.masivo-textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #333;
+    background: #f8f9fa;
+    resize: vertical;
+    min-height: 90px;
+    max-height: 160px;
+    transition: all 0.18s;
+    box-sizing: border-box;
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+.masivo-textarea:focus {
+    outline: none;
+    border-color: #f5576c;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(245, 87, 108, 0.08);
+}
+
+/* Aviso */
+.masivo-aviso {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #fff8e1;
+    border-left: 3px solid #f9a825;
+    border-radius: 0 8px 8px 0;
+    font-size: 12px;
+    color: #795548;
+    line-height: 1.4;
+}
+
+.masivo-aviso i {
+    font-size: 16px;
+    color: #f9a825;
+    flex-shrink: 0;
+}
+
+/* Footer fijo en la parte inferior */
+.masivo-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 22px 18px;
+    border-top: 1px solid #f0f0f0;
+    flex-shrink: 0;
+    background: inherit;
+}
+
+.masivo-btn-send {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 22px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    box-shadow: 0 3px 12px rgba(245, 87, 108, 0.32);
+}
+
+.masivo-btn-send:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(245, 87, 108, 0.42);
+}
+
+.masivo-btn-send:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.masivo-btn-send i {
+    font-size: 15px;
+}
+
+/* ── Modo oscuro ── */
+body.dark-mode .masivo-modal {
+    background: #1e293b;
+}
+
+body.dark-mode .masivo-section-label {
+    color: #94a3b8;
+}
+
+body.dark-mode .masivo-pill span {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .masivo-pill span strong {
+    color: #cbd5e1;
+}
+
+body.dark-mode .masivo-pill:hover span {
+    border-color: #f5576c;
+    background: rgba(245, 87, 108, 0.1);
+}
+
+body.dark-mode .masivo-input,
+body.dark-mode .masivo-textarea {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+    color: #e2e8f0;
+}
+
+body.dark-mode .masivo-input:focus,
+body.dark-mode .masivo-textarea:focus {
+    background: rgba(255,255,255,0.08);
+    border-color: #f5576c;
+}
+
+body.dark-mode .masivo-aviso {
+    background: rgba(249, 168, 37, 0.08);
+    color: #fcd34d;
+}
+
+body.dark-mode .masivo-footer {
+    border-top-color: rgba(255,255,255,0.08);
+    background: #1e293b;
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 560px) {
+    .masivo-modal {
+        border-radius: 12px;
+        max-height: 96vh;
+    }
+
+    .masivo-header {
+        padding: 14px 16px 12px;
+    }
+
+    .masivo-body {
+        padding: 14px 16px;
+        gap: 14px;
+    }
+
+    .masivo-footer {
+        padding: 12px 16px 14px;
+    }
+
+    .masivo-group-pills {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .btn-masivo-trigger span {
+        display: none;
+    }
+}
