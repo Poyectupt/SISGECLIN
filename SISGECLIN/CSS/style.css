@@ -1,0 +1,91 @@
+.contenedor{
+    font-family: 'Times New Roman', Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    font-weight: 100;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.contenedor_header{
+    width: 100vw;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    box-shadow: 0 0 25px 5px #000a;
+}
+
+.header_tittle{
+    width: 18vw;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #030399;
+    color: #fff;
+}
+
+.header_tittle h1{
+    margin: 0;
+}
+
+.header_opcion{
+    width: 82vw;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    background-color: #0a03cd;
+    padding: 0 20px 0 0;
+}
+
+.contenedor_header .bi{
+    font-size: 25px;
+    margin-right: 25px;
+    color: #fff;
+}
+
+.nav_menu{
+    width: 18vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+
+    background-color: #0a03cd;
+    box-shadow: 0 0 45px 5px #000a;
+}
+
+.nav_menu a{
+    color: #fff;
+}
+
+.contenedor_section{
+    width: 82vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenido{
+    background-color: #bdbdbd;
+    width: 95%;
+    height: 85vh;
+}
+
+.contenedor_footer{
+    width: 100vw;
+    height: 28.5px;
+    background-color: #555;
+    box-shadow: 0 0 45px 5px #000a;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
